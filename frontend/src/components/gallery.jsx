@@ -1,6 +1,7 @@
 import React from 'react';
 import ImageShow from './imageShow';
 import ImageAdd from './imageAdd';
+import Footer from './footer';
 
 class Gallery extends React.Component {
   constructor(props) {
@@ -33,10 +34,11 @@ class Gallery extends React.Component {
     });
   }
 
-  displayImage(image) {
+  displayImage(idx) {
     this.disableScroll();
     const props = {
-      imageProperties: image,
+      images: this.state.images,
+      currentImageIndex: idx,
       closeModal: this.closeModal
     };
     this.setState({
@@ -52,7 +54,7 @@ class Gallery extends React.Component {
   render() {
     const gallery = this.state.images.map((image, idx) => {
       return (
-        <img onClick={() => this.displayImage(image)} className="gallery-item" alt="" key={idx} src={image.imageURL.S} />
+        <img onClick={() => this.displayImage(idx)} className="gallery-item" alt="" key={idx} src={image.imageURL.S} />
       );
     });
     let imageModal;
@@ -64,6 +66,7 @@ class Gallery extends React.Component {
         <h1 id='title'>looksLikeArt</h1>
         <div id='gallery-container'>{gallery}</div>
         {imageModal}
+        <Footer />
       </div>
     );
   }

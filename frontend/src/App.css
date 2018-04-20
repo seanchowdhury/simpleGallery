@@ -6,13 +6,18 @@ body {
   font-size: 40px;
   font-weight: lighter;
   text-align: center;
-  margin: 50px 0 40px 0;
+  background-color: white;
+  padding: 25px 0;
+  margin: 25px 0;
   font-family: 'Josefin Slab', serif;
-  text-decoration: underline;
+  letter-spacing: -0.05em;
+  border-top: 1px dashed rgb(150, 170, 150);
+  border-bottom: 1px dashed rgb(150, 170, 150);
+  /*text-decoration: underline;*/
 }
 
 .gallery-item {
-  max-height: 200px;
+  max-height: 240px;
   width: auto;
   margin: 25px 25px;
   border: 1px solid rgba(123, 130, 123, 0.2);
@@ -48,11 +53,18 @@ body {
   opacity: 1;
 }
 
+@keyframes modal-animation {
+  0% {transform: scale(0);}
+  100% {transform: scale(1);}
+}
+
 #inner-modal {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  animation-name: modal-animation;
+  animation-duration: .3s;
 }
 
 #inner-modal h2 {
@@ -72,9 +84,37 @@ body {
 #inner-modal img {
   max-width: 80%;
   max-height: 80vh;
-  border: 15px solid white;
+  border: 25px solid white;
 }
 
 #inner-modal:hover img {
   cursor: pointer;
+}
+
+#footer {
+  padding: 25px 0 50px 0;
+  margin-top: 55px;
+  background-color: white;
+  border-top: 1px dashed rgb(150, 170, 150);
+  display: flex;
+  justify-content: space-around;
+}
+
+.footer-item {
+  width: 20%;
+}
+
+.footer-item h3 {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 1.2em;
+  letter-spacing: 0.1em;
+  color: rgb(150, 170, 150);
+}
+
+.footer-item p {
+  margin: 5px 0 0 20px;
+  font-weight: lighter;
+  font-size: 0.9em;
+  letter-spacing: 0.1em;
+  color: black;
 }
