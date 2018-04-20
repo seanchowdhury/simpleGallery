@@ -1,5 +1,6 @@
 import React from 'react';
 import ImageShow from './imageShow';
+import ImageAdd from './imageAdd';
 
 class Gallery extends React.Component {
   constructor(props) {
@@ -33,6 +34,7 @@ class Gallery extends React.Component {
   }
 
   displayImage(image) {
+    this.disableScroll();
     const props = {
       imageProperties: image,
       closeModal: this.closeModal
@@ -43,6 +45,7 @@ class Gallery extends React.Component {
   }
 
   closeModal() {
+    this.enableScroll();
     this.setState({currentImage: null});
   }
 
@@ -58,11 +61,41 @@ class Gallery extends React.Component {
     }
     return(
       <div>
-        <h1 id='title'>itlookslikeart</h1>
+        <h1 id='title'>looksLikeArt</h1>
         <div id='gallery-container'>{gallery}</div>
         {imageModal}
       </div>
     );
+  }
+
+
+  preventDefault(e) {
+    e = e || window.event;
+    if (e.preventDefault)
+        e.preventDefault();
+    e.returnValue = false;
+  }
+
+  preventDefaultForScrollKeys(e) {
+    const keys = {37: 1, 38: 1, 39: 1, 40: 1};
+    if (keys[e.keyCode]) {
+      e.preventDefault();
+      return false;
+    }
+  }
+
+  disableScroll() {
+    window.onwheel = this.preventDefault; // modern standard
+    window.onmousewheel = document.onmousewheel = this.preventDefault; // older browsers, IE
+    window.ontouchmove  = this.preventDefault; // mobile
+    document.onkeydown  = this.preventDefaultForScrollKeys;
+  }
+
+  enableScroll() {
+    window.onmousewheel = document.onmousewheel = null;
+    window.onwheel = null;
+    window.ontouchmove = null;
+    document.onkeydown = null;
   }
 }
 
