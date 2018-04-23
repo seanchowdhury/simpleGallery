@@ -137,3 +137,53 @@ body {
   letter-spacing: 0.1em;
   color: black;
 }
+
+#showcase-create-container {
+  display: flex;
+  flex-direction: column;
+}
+
+#curate-submit {
+  width: 200px;
+  height: 50px;
+  border: none;
+  background-color: #fff2f2
+}
+
+#curate-submit:hover {
+  cursor: pointer;
+  background-color: #faeeed
+}
+
+#curate-preview {
+  background-color: rgb(255, 252, 247);
+  display: flex;
+}
+
+#curate-preview textarea {
+  resize: none;
+  outline: none;
+  overflow: scroll;
+  width: 400px;
+  height: 200px;
+}
+
+#generate-url {
+  display: flex;
+  margin-top: 10px;
+}
+
+#clientURL {
+  margin: 12.5px 50px 0 50px;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.preview-item {
+  height: 100px;
+}
+
+.preview-item:hover {
+  cursor: pointer;
+}
