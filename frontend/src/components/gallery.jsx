@@ -54,7 +54,7 @@ class Gallery extends React.Component {
   render() {
     const gallery = this.state.images.map((image, idx) => {
       return (
-        <img onClick={() => this.displayImage(idx)} className="gallery-item" alt="" key={idx} src={image.imageURL.S} />
+        <img onClick={() => this.displayImage(idx)} className="gallery-item" alt="" key={idx} src={image.imageURL} />
       );
     });
     let imageModal;

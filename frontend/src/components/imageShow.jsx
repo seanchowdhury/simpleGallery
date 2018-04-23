@@ -9,6 +9,22 @@ class ImageShow extends React.Component {
   }
 
   componentWillMount() {
+    document.addEventListener('keyup', (e) => {
+      console.log(e);
+      switch(e.key) {
+        case "ArrowLeft":
+          this.previousImage(e);
+          break;
+        case "ArrowRight":
+          this.nextImage(e);
+          break;
+        case "Escape":
+          this.props.closeModal();
+          break;
+        default:
+          break;
+      }
+    });
     this.setState({
       currentImageIndex: this.props.currentImageIndex
     });
@@ -16,7 +32,7 @@ class ImageShow extends React.Component {
 
   openImage(e) {
     e.stopPropagation();
-    window.open(this.props.images[this.state.currentImageIndex].imageURL.S);
+    window.open(this.props.images[this.state.currentImageIndex].imageURL);
   }
 
   previousImage(e) {
@@ -43,22 +59,30 @@ class ImageShow extends React.Component {
     const currentImage = this.props.images[this.state.currentImageIndex];
     let title;
     if(currentImage.title){
-      title = currentImage.title.S;
+      title = currentImage.title;
     }
     let description;
     if(currentImage.description){
-      description = currentImage.description.S;
+      description = currentImage.description;
     }
-    let image = <img src={currentImage.imageURL.S} onClick={(e) => this.openImage(e)}/>;
+    const image = <img alt="" src={currentImage.imageURL} onClick={(e) => this.openImage(e)}/>;
+    let previousImage;
+    if(this.state.currentImageIndex !== 0) {
+      previousImage = <i onClick={(e) => this.previousImage(e)} className="fas fa-angle-left"></i>;
+    }
+    let nextImage;
+    if(!(this.state.currentImageIndex === this.props.images.length -1)) {
+      nextImage = <i onClick={(e) => this.nextImage(e)} className="fas fa-angle-right"></i>;
+    }
     return (
       <div id='outer-modal' onClick={() => this.props.closeModal()}>
-        <button onClick={(e) => this.previousImage(e)}>BACK</button>
+        {previousImage}
         <div max-width={image.clientWidth} id='inner-modal'>
           {image}
           <h2 onClick={(e) => e.stopPropagation()}>{title}</h2>
           <p onClick={(e) => e.stopPropagation()}>{description}</p>
         </div>
-        <button onClick={(e) => this.nextImage(e)}>FORWARD</button>
+        {nextImage}
       </div>
     );
   }
