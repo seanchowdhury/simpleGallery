@@ -4,12 +4,16 @@ import Showcase from './showcase';
 import ShowcaseCreate from './showcaseCreate';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Cookie from 'js-cookie';
+import createHistory from "history/createBrowserHistory";
+
+const history = createHistory();
 
 const App = ({ store }) =>  (
   <Switch>
-    <ProtectedRoute authorized={checkJWT()} path="/welcome" component={Showcase} />
     <Route exact path="/create" component={ShowcaseCreate} />
+    <Route exact path="/" component={Showcase} />
     <Route path="/:token" render={(props) => initialAuthorize(props)}/>
+    //<ProtectedRoute path="/" />
   </Switch>
 );
 
@@ -25,13 +29,9 @@ const initialAuthorize = (props) => {
   return <Redirect to="/" />;
 };
 
-const ProtectedRoute = (props) => {
-  console.log(props);
-  if(props.authorized) {
-    return <Route exact path={props.path} component={props.component}/>;
-  } else {
-    return <Redirect to="/"/>;
-  }
+const ProtectedRoute = () => {
+
+  return <Redirect to="/welcome" component={Showcase} />;
 };
 
 const checkJWT = () => {

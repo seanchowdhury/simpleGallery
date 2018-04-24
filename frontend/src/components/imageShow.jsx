@@ -9,6 +9,7 @@ class ImageShow extends React.Component {
   }
 
   componentWillMount() {
+    console.log("hello?");
     document.addEventListener('keyup', (e) => {
       console.log(e);
       switch(e.key) {

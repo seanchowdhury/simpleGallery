@@ -5,7 +5,7 @@ class ShowcaseCreate extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      images: [{imageURL: "https://corporate.homedepot.com/sites/default/files/styles/thumbnail/public/image_gallery/THD_logo.jpg"}],
+      images: [],
       lastEvaluatedKey: null,
       letter: "",
       curatedImages: []
@@ -58,7 +58,7 @@ class ShowcaseCreate extends React.Component {
       method: 'POST'
     })
     .then(res => res.json())
-    .then(res => this.setState({ url: `localhost:3000/${res}` }))
+    .then(res => this.setState({ url: `localhost:3000/${res}` }));
   }
 
   render() {
@@ -73,22 +73,22 @@ class ShowcaseCreate extends React.Component {
     });
 
     const selectedPreview = this.state.curatedImages.map((image, idx) => {
-      return <img onClick={() => this.deselectImage(image)} className="preview-item" alt="" key={idx} src={image.imageURL} />
+      return <img onClick={() => this.deselectImage(image)} className="preview-item" alt="" key={idx} src={image.imageURL} />;
     });
     return (
       <div id="showcase-create-container">
         <div id="curate-preview">
-          <textarea value={this.state.letter}
+          <pre><textarea value={this.state.letter}
             onChange={(e) => this.setState({letter: e.currentTarget.value})}
             placeholder="write something nice"
-            className="letter-form"/>
+            className="letter-form"/></pre>
           <div id='selected-preview'>
             {selectedPreview}
           </div>
         </div>
         <div id='generate-url'>
           <button onClick={this.handleSubmit} id="curate-submit">Generate Link</button>
-          <div id='clientURL'>this.state.url</div>
+          <div id='clientURL'>{this.state.url}</div>
         </div>
         <div id="gallery-container">{gallery}</div>
       </div>

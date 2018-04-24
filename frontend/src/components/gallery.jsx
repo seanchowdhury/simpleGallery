@@ -1,6 +1,5 @@
 import React from 'react';
 import ImageShow from './imageShow';
-import ImageAdd from './imageAdd';
 import Footer from './footer';
 
 class Gallery extends React.Component {
